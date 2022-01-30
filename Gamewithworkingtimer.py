@@ -5,7 +5,6 @@ import tkinter
 
 dispexpress = ""
 testword = ""
-testwordarr = []
 turn = -1
 timeleft = 60
 highestscore = 0
@@ -14,11 +13,9 @@ highestscore = 0
 def resetGame():
     global testword
     global dispexpress
-    global testwordarr
     global timeleft
     global turn
     testword = ""
-    testwordarr = []
     dispexpress = ""
     newWord()
     equation.set("")
@@ -52,7 +49,6 @@ def newWord():
             else:
                 probdecider = False
     testequation.set(testword)
-    testwordarr[:0] = testword
 
 
 def press(num):
