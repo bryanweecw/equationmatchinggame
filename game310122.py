@@ -44,6 +44,10 @@ def congratsunplayable():
     pygame.mixer.Channel(5).play(pygame.mixer.Sound("congratsunplayable.wav"))
 
 
+def highscoresound():
+    pygame.mixer.Channel(6).play(pygame.mixer.Sound("highscore.wav"))
+
+
 def resetGame():
     global testword
     global dispexpress
@@ -53,7 +57,7 @@ def resetGame():
     global congratsplayedbefore
     if game.score > highestscore:
         if not congratsplayedbefore:
-            congratsplayable()
+            highscoresound()
             congratsplayedbefore = True
         highestscore = game.score
         highscore.set(highestscore)
@@ -112,6 +116,7 @@ def press(num):
             if game.score > 10:
                 congratsunplayable()
             game.score += 1
+            congratsplayable()
             gamescore.set(game.score)
             resetGame()
     else:
@@ -167,6 +172,11 @@ class GameState:
 
     def toggle(self):
         self.pause = not self.pause
+        if self.pause:
+            stopticksound()
+        if not self.pause:
+            if timeleft < 15:
+                ticksound()
         print(self.pause)
 
 
