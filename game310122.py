@@ -93,7 +93,7 @@ def newWord():
             probdecider = False
         else:
             probs = randint(0, 100)
-            if probs < 0:
+            if probs < 35:
                 probdecider = True
             else:
                 probdecider = False
