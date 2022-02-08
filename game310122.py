@@ -93,7 +93,7 @@ def newWord():
             probdecider = False
         else:
             probs = randint(0, 100)
-            if probs < 35:
+            if probs < 65:
                 probdecider = True
             else:
                 probdecider = False
@@ -151,14 +151,14 @@ class GameState:
         ]
 
     def start(self):
-        if self.runstate == True:
+        if not self.runstate:
             return
         self.score = 0
         self.runstate = True
         self.hasLost = False
 
     def end(self):
-        if self.runstate == False:
+        if not self.runstate:
             return
         print("your score is: ", self.score)
         self.runstate = True
