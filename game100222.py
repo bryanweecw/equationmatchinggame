@@ -3,24 +3,6 @@ from random import randint
 import tkinter
 import pygame
 
-# string to store the user's input
-dispexpress = ""
-
-# string to store the correct answer
-testword = ""
-
-# turn is used to refer to the index of the input and the correct answer to compare the two
-turn = -1
-
-# timeleft is used for the game timer
-timeleft = 30
-
-# highestscore is to store the highscore
-highestscore = 0
-
-# congratsplayedbefore boolean is to ensure that the highscore message
-# is only played once per round upon the beating of the previous highscore
-congratsplayedbefore = False
 
 # background music
 def bgm():
@@ -70,70 +52,57 @@ def highscoresound():
 
 #
 def resetGame():
-    global testword
-    global dispexpress
-    global timeleft
-    global turn
-    global highestscore
-    global congratsplayedbefore
-    if game.score > highestscore:
-        if not congratsplayedbefore:
+    if game.score > game.highestscore:
+        if not game.congratsplayedbefore:
             highscoresound()
-            congratsplayedbefore = True
-        highestscore = game.score
-        highscore.set(highestscore)
-    testword = ""
-    dispexpress = ""
+            game.congratsplayedbefore = True
+        game.highestscore = game.score
+        highscore.set(game.highestscore)
+    game.testword = ""
+    game.dispexpress = ""
     newWord()
     stopticksound()
     equation.set("")
-    timeleft = 30
-    turn = -1
+    game.timeleft = 30
+    game.turn = -1
 
 
 def resetScore():
-    global congratsplayedbefore
     game.score = 0
     gamescore.set(game.score)
-    congratsplayedbefore = False
+    game.congratsplayedbefore = False
 
 
 def newWord():
-    global testword
     probdecider = True
     randops = ["+", "-", "÷", "x"]
-    testword = (
-        testword
+    game.testword = (
+        game.testword
         + str(randint(0, 999))
         + randops[(randint(0, 3))]
         + str(randint(0, 999))
     )
     while probdecider:
-        testword = testword + randops[(randint(0, 3))] + str(randint(0, 999))
-        if len(testword) > 35:
+        game.testword = game.testword + randops[(randint(0, 3))] + str(randint(0, 999))
+        if len(game.testword) > 35:
             probdecider = False
         else:
             probs = randint(0, 100)
-            if probs < 65:
+            if probs < 75:
                 probdecider = True
             else:
                 probdecider = False
-    testequation.set(testword)
+    testequation.set(game.testword)
 
 
 def press(num):
-    global dispexpress
-    global turn
-    global highestscore
-    dispexpress = dispexpress + str(num)
-    equation.set(dispexpress)
+    game.dispexpress = game.dispexpress + str(num)
+    equation.set(game.dispexpress)
     game.randompos()
-    turn += 1
-    print(len(testword))
-    print(turn)
-    if dispexpress[turn] == testword[turn]:
+    game.turn += 1
+    if game.dispexpress[game.turn] == game.testword[game.turn]:
         bing()
-        if (turn + 1) == len(testword):
+        if (game.turn + 1) == len(game.testword):
             if game.score > 10:
                 congratsunplayable()
             game.score += 1
@@ -169,6 +138,24 @@ class GameState:
             [5, 0],
             [5, 1],
         ]
+        # string to store the user's input
+        self.dispexpress = ""
+
+        # string to store the correct answer
+        self.testword = ""
+
+        # turn is used to refer to the index of the input and the correct answer to compare the two
+        self.turn = -1
+
+        # timeleft is used for the game timer
+        self.timeleft = 30
+
+        # highestscore is to store the highscore
+        self.highestscore = 0
+
+        # congratsplayedbefore boolean is to ensure that the highscore message
+        # is only played once per round upon the beating of the previous highscore
+        self.congratsplayedbefore = False
 
     def start(self):
         if not self.runstate:
@@ -179,7 +166,6 @@ class GameState:
     def end(self):
         if not self.runstate:
             return
-        print("your score is: ", self.score)
         self.runstate = True
 
     def randompos(self):
@@ -193,9 +179,8 @@ class GameState:
         if self.pause:
             stopticksound()
         if not self.pause:
-            if timeleft < 15:
+            if self.timeleft < 15:
                 ticksound()
-        print(self.pause)
 
 
 if __name__ == "__main__":
@@ -262,7 +247,7 @@ if __name__ == "__main__":
     ).grid(row=7, column=1)
 
     # Game timer
-    gametimer = tkinter.Label(window, text=timeleft, fg="firebrick1")
+    gametimer = tkinter.Label(window, text=game.timeleft, fg="firebrick1")
     gametimer.grid(column=0, row=0)
 
     # Instructions for the game
@@ -417,19 +402,19 @@ if __name__ == "__main__":
     def tock():
         global timeleft
         if game.pause:
-            timeleft = timeleft
+            game.timeleft = game.timeleft
         else:
-            timeleft -= 1
-            gametimer.config(text=timeleft)
-            if timeleft == 15:
+            game.timeleft -= 1
+            gametimer.config(text=game.timeleft)
+            if game.timeleft == 15:
                 ticksound()
-            if timeleft == 0:
+            if game.timeleft == 0:
                 stopticksound()
                 buzz()
                 resetGame()
 
     def tick():
-        if timeleft > 0:
+        if game.timeleft > 0:
             tock()
             window.after(1000, tick)
 
