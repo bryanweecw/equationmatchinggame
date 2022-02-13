@@ -102,7 +102,7 @@ def press(num):
     game.turn += 1
     if game.dispexpress[game.turn] == game.testword[game.turn]:
         bing()
-        if (game.turn + 1) == len(game.testword):
+        if len(game.dispexpress) == len(game.testword):
             if game.score > 10:
                 congratsunplayable()
             game.score += 1
@@ -400,7 +400,6 @@ if __name__ == "__main__":
 
     # TIMER function
     def tock():
-        global timeleft
         if game.pause:
             game.timeleft = game.timeleft
         else:
