@@ -30,7 +30,8 @@ def ticksound():
     pygame.mixer.Channel(3).play(pygame.mixer.Sound("ticksound.wav"), loops=-1)
 
 
-# stop ticking sound for timer; use by the pause button, and also upon timer reset
+# stop ticking sound for timer;
+# use by the pause button, and also upon timer reset
 def stopticksound():
     pygame.mixer.Channel(3).stop()
 
@@ -83,7 +84,8 @@ def newWord():
         + str(randint(0, 999))
     )
     while probdecider:
-        game.testword = game.testword + randops[(randint(0, 3))] + str(randint(0, 999))
+        game.testword = game.testword + \
+            randops[(randint(0, 3))] + str(randint(0, 999))
         if len(game.testword) > 35:
             probdecider = False
         else:
@@ -144,7 +146,8 @@ class GameState:
         # string to store the correct answer
         self.testword = ""
 
-        # turn is used to refer to the index of the input and the correct answer to compare the two
+        # turn is used to refer to the index of the input
+        # and the correct answer to compare the two
         self.turn = -1
 
         # timeleft is used for the game timer
@@ -154,23 +157,11 @@ class GameState:
         self.highestscore = 0
 
         # congratsplayedbefore boolean is to ensure that the highscore message
-        # is only played once per round upon the beating of the previous highscore
+        # is only played once per round upon the
+        # beating of the previous highscore
         self.congratsplayedbefore = False
 
-    def start(self):
-        if not self.runstate:
-            return
-        self.score = 0
-        self.runstate = True
-
-    def end(self):
-        if not self.runstate:
-            return
-        self.runstate = True
-
     def randompos(self):
-        random.shuffle(self.buttonColumns)
-        random.shuffle(self.buttonRows)
         random.shuffle(self.buttonCoords)
         window.update()
 
@@ -201,20 +192,92 @@ if __name__ == "__main__":
 
     # Function to be called to randomly replace the buttons in the grid
     def replaceButtons():
-        button1.grid(row=game.buttonCoords[0][0], column=game.buttonCoords[0][1])
-        button2.grid(row=game.buttonCoords[1][0], column=game.buttonCoords[1][1])
-        button3.grid(row=game.buttonCoords[2][0], column=game.buttonCoords[2][1])
-        button4.grid(row=game.buttonCoords[3][0], column=game.buttonCoords[3][1])
-        button5.grid(row=game.buttonCoords[4][0], column=game.buttonCoords[4][1])
-        button6.grid(row=game.buttonCoords[5][0], column=game.buttonCoords[5][1])
-        button7.grid(row=game.buttonCoords[6][0], column=game.buttonCoords[6][1])
-        button8.grid(row=game.buttonCoords[7][0], column=game.buttonCoords[7][1])
-        button9.grid(row=game.buttonCoords[8][0], column=game.buttonCoords[8][1])
-        button10.grid(row=game.buttonCoords[9][0], column=game.buttonCoords[9][1])
-        button11.grid(row=game.buttonCoords[10][0], column=game.buttonCoords[10][1])
-        button12.grid(row=game.buttonCoords[11][0], column=game.buttonCoords[11][1])
-        button13.grid(row=game.buttonCoords[12][0], column=game.buttonCoords[12][1])
-        button14.grid(row=game.buttonCoords[13][0], column=game.buttonCoords[13][1])
+        button1.grid(
+            row=game.buttonCoords[0][0],
+            column=game.buttonCoords[0][1])
+        button2.grid(
+            row=game.buttonCoords[1][0],
+            column=game.buttonCoords[1][1])
+        button3.grid(
+            row=game.buttonCoords[2][0],
+            column=game.buttonCoords[2][1])
+        button4.grid(
+            row=game.buttonCoords[3][0],
+            column=game.buttonCoords[3][1])
+        button5.grid(
+            row=game.buttonCoords[4][0],
+            column=game.buttonCoords[4][1])
+        button6.grid(
+            row=game.buttonCoords[5][0],
+            column=game.buttonCoords[5][1])
+        button7.grid(
+            row=game.buttonCoords[6][0],
+            column=game.buttonCoords[6][1])
+        button8.grid(
+            row=game.buttonCoords[7][0],
+            column=game.buttonCoords[7][1])
+        button9.grid(
+            row=game.buttonCoords[8][0],
+            column=game.buttonCoords[8][1])
+        button10.grid(
+            row=game.buttonCoords[9][0],
+            column=game.buttonCoords[9][1])
+        button11.grid(
+            row=game.buttonCoords[10][0],
+            column=game.buttonCoords[10][1])
+        button12.grid(
+            row=game.buttonCoords[11][0],
+            column=game.buttonCoords[11][1])
+        button13.grid(
+            row=game.buttonCoords[12][0],
+            column=game.buttonCoords[12][1])
+        button14.grid(
+            row=game.buttonCoords[13][0],
+            column=game.buttonCoords[13][1])
+
+    def resetButtons():
+        button1.grid(
+            row=game.buttonRows[0],
+            column=game.buttonColumns[0])
+        button2.grid(
+            row=game.buttonRows[1],
+            column=game.buttonColumns[1])
+        button3.grid(
+            row=game.buttonRows[2],
+            column=game.buttonColumns[2])
+        button4.grid(
+            row=game.buttonRows[3],
+            column=game.buttonColumns[3])
+        button5.grid(
+            row=game.buttonRows[4],
+            column=game.buttonColumns[4])
+        button6.grid(
+            row=game.buttonRows[5],
+            column=game.buttonColumns[5])
+        button7.grid(
+            row=game.buttonRows[6],
+            column=game.buttonColumns[6])
+        button8.grid(
+            row=game.buttonRows[7],
+            column=game.buttonColumns[7])
+        button9.grid(
+            row=game.buttonRows[8],
+            column=game.buttonColumns[8])
+        button10.grid(
+            row=game.buttonRows[9],
+            column=game.buttonColumns[9])
+        button11.grid(
+            row=game.buttonRows[10],
+            column=game.buttonColumns[10])
+        button12.grid(
+            row=game.buttonRows[11],
+            column=game.buttonColumns[11])
+        button13.grid(
+            row=game.buttonRows[12],
+            column=game.buttonColumns[12])
+        button14.grid(
+            row=game.buttonRows[13],
+            column=game.buttonColumns[13])
 
     # Equation keyed in by user
     equation_field = tkinter.Label(
@@ -239,7 +302,8 @@ if __name__ == "__main__":
     ).grid(row=6, column=1)
 
     # High Score
-    high_score = tkinter.Label(window, text="Highscore:", font="Helvetica 20").grid(
+    high_score = tkinter.Label(
+        window, text="Highscore:", font="Helvetica 20").grid(
         row=7, column=0
     )
     high_score_field = tkinter.Label(
@@ -253,7 +317,8 @@ if __name__ == "__main__":
     # Instructions for the game
     instructions = tkinter.Label(
         window,
-        text="Press the buttons to re-create the equation shown before the timer runs out",
+        text="""Press the buttons to re-create the
+         equation shown before the timer runs out""",
         font="Helvetica 14",
         fg="firebrick1",
     )
@@ -390,11 +455,12 @@ if __name__ == "__main__":
         window,
         text="New Game",
         fg="black",
-        command=lambda: [game.end(), game.start(), resetGame(), resetScore()],
+        command=lambda: [resetGame(), resetScore(), resetButtons()],
     )
     startbutton.grid(row=6, column=2)
     endbutton = tkinter.Button(
-        window, text="Toggle Timer", fg="black", command=lambda: [game.toggle()]
+        window, text="Toggle Timer", fg="black",
+        command=lambda: [game.toggle()]
     )
     endbutton.grid(row=6, column=3)
 
