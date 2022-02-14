@@ -1,7 +1,8 @@
+import pygame  # pygame is imported for us to make use of its mixer
 import random
+# random and randint are imported to allow us to generate random numbers
 from random import randint
-import tkinter
-import pygame
+import tkinter  # tkinter is imported for us to create the GUI
 
 
 class GameState:
@@ -216,7 +217,49 @@ class GameState:
 
     def generateNewWord(self):
         """
-        Called by newWord
+        Called by newWord(), this function declares
+        a probdecider boolean value as true
+
+        This function makes use of the random library, specifically
+        the randint function
+
+        Then it creates a list of operators as strings named
+        randops
+
+        It then creates a string variable generatedWord, and
+        gives it a random integer between 0 and 999, converted
+        to a string, a random operator using randint to provide
+        a random index between 0 and 3 to reference the randops
+        list, and another random integer between 0 and 999, converted
+        to a string
+
+        Then, a while loop runs while probdecider is true, which will
+        continue generating a longer equation by returning a random
+        operator using randint to provide
+        a random index between 0 and 3 to reference the randops
+        list, and another random integer between 0 and 999, converted
+        to a string, and concatenating that to generatedWord
+
+        The function checks that the length of generatedWord
+        does not exceed 35, and if it does changes probdecider
+        to false so that the while loop exits, and generatedWord
+        is returned.
+
+        This ensures that the length of the equation generated
+        will be able to fit in our GUI
+
+        If generatedWord does not exceed the length,
+        it uses randint(0,100) to return an integer between
+        0 and 100. Then it checks whether the integer, named probs,
+        is less than 75.
+
+        If it is, probdecider is set as true, and the while loop
+        continues.
+
+        Else, probdecider is set as false, exiting the while loop.
+
+        In short, there is a 75% chance during each loop that the
+        loop continues unless the string exceeds the max length.
         """
         probdecider = True
         randops = ["+", "-", "÷", "x"]
@@ -253,8 +296,33 @@ class GameState:
     def press(self, num):
         """
         Takes user input based as num, updates the expression displayed,
-        and checks against the given equation to see if game is won,
-        lost, or if still ongoing
+        by concatenating it to dispexpress, and setting equation as
+        dispexpress
+
+
+        The function then calls randompos() which shuffles the coords of
+        the buttons, replacing them in random positions.
+
+        The function also adds 1 to turn so that it can be used to refer to
+        an index in dispexpress and testword, and compare their values.
+
+        If the value is the same, it calls bing() which plays a congratulatory
+        sound
+
+        Then it checks if the length of disexpress is equal to the length of
+        testword, to decide whether the game should be reset
+
+        If it is, it checks if the score is above 10. If it is, it plays
+        an annoying sound by calling congratsunplayable()
+
+        Then it adds 1 to the current socre, plays a congratulatory sound by
+        calling congratsplayable() and sets the gamescore as the current score,
+        and then resets the game by calling resetGame()
+
+        If the user input does not match,
+        it plays a sad sound by calling bong() and calls
+        resetScore() and resetGame() to reset the score and
+        game.
 
         Parameters:
         ----

@@ -1,4 +1,4 @@
-from game100222 import (
+from MainGameFile import (
     GameState,
 )
 
@@ -27,4 +27,4 @@ def test_scoreReset():
     game = GameState()
     game.scoreReset()
     assert game.score == 0
-    assert game.congratsplayedbefore == False
+    assert not game.congratsplayedbefore
