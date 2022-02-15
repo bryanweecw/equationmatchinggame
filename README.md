@@ -33,3 +33,7 @@ The GUI has been tested and works on MacOS. If you are running a different OS, y
 ## Unit Testing
 
 To run unit tests, ensure you have pytest installed, with `pip install pytest`, then run `pytest unittests.py`
+
+## Github Repo Link
+
+Project files can be found at this [link](https://github.com/bryanweecw/equationmatchinggame)
