@@ -1,4 +1,5 @@
-import pygame  # pygame is imported for us to make use of its mixer
+import pygame  # pygame is imported for us to make use of its mixer;
+# run `pip install pygame` in your terminal to install the pygame dependency
 import random
 # random and randint are imported to allow us to generate random numbers
 from random import randint
