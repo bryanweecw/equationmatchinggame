@@ -13,8 +13,8 @@ def test_generateNewWord():
         assert False, "generateNewWord not defined"
 
     testword = game.generateNewWord()
-    assert len(testword) < 39
-    assert len(testword) >= 5
+    for i in range(10000):
+        assert len(testword) < 40
 
 
 def test_scoreReset():
