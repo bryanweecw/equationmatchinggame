@@ -14,7 +14,7 @@ def test_generateNewWord():
 
     testword = game.generateNewWord()
     assert len(testword) < 39
-    assert len(testword) > 3
+    assert len(testword) >= 5
 
 
 def test_scoreReset():
