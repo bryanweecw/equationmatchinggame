@@ -3,15 +3,14 @@ from MainGameFile import (
 )
 
 
-game = GameState()
-
-
 def test_generateNewWord():
     try:
+        game = GameState()
         game.generateNewWord()
     except NameError:
         assert False, "generateNewWord not defined"
 
+    game = GameState()
     testword = game.generateNewWord()
     for i in range(10000):
         assert len(testword) < 40
